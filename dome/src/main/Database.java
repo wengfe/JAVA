@@ -39,6 +39,7 @@ public class Database {
         db.add(new CD("飞云之上","林俊杰&韩红",3,8,"节目歌曲"));
         db.add(new DVD("海王","陆XX",160,"DC宇宙"));
         db.add(new DVD("蜘蛛侠平行宇宙","XX",180,"漫威宇宙"));
+        db.add(new VideoGame("超凡蜘蛛侠",280,false,"PS4",1));
         db.list();
     }
 }

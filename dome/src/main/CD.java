@@ -13,6 +13,21 @@ public class CD extends Item{
         this.numofTracks = numofTracks;
     }
 
+
+    @Override
+    public String toString() {
+        return "CD{" +
+                "artist='" + artist + '\'' +
+                ", numofTracks=" + numofTracks +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        CD cc = (CD)obj;
+        return artist.equals(cc.artist);
+    }
+
     public void print() {
         System.out.println(title+": " +artist);
     }
@@ -20,5 +35,9 @@ public class CD extends Item{
     public static void main(String[] args) {
         CD cd = new CD("abc","art",24,6,"...");
         cd.print();
+        System.out.println(cd);
+
+        CD cd1 = new CD("abc","art",24,6,"...");
+        System.out.println(cd.equals(cd1));
     }
 }
