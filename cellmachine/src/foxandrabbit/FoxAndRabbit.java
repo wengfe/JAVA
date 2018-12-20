@@ -9,6 +9,8 @@ import field.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FoxAndRabbit {
     private static Field field = new Field(60, 60);
@@ -22,23 +24,33 @@ public class FoxAndRabbit {
         frame.setTitle("Fox and Rabbit");
         frame.setResizable(false);
         frame.add(view);
+        JButton btnStep = new JButton("单步");
+        frame.add(btnStep, BorderLayout.NORTH);
+        btnStep.addActionListener(new ActionListener() {
+//            匿名类 访问函数本地变量，需要是 final 变量
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("abc");
+                initMoved();
+                change();
+                frame.repaint();
+            }
+        });
         frame.pack();
         frame.setVisible(true);
 
-        while (true){
-            initMoved();
-            change();
-            frame.repaint();
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        while (true){
+//            initMoved();
+//            change();
+//            frame.repaint();
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
     private static void initMoved(){
-        int h =field.getHeight();
-        int w = field.getWidth();
         for(int r = 0; r < field.getHeight(); r++)
         {
             for (int c = 0; c < field.getWidth(); c++)
