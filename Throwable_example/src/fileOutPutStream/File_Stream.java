@@ -27,17 +27,18 @@ public class File_Stream {
 //            Reader/Writer
             PrintWriter out_p = new PrintWriter(
                     new BufferedWriter(
-//                            OutputStreamWriter 构建了 Stream 和 Writer 之间的桥梁
+//                            OutputStreamWriter 构建了 Stream 和 Writer 之间的桥梁,第二个参数增加 编码格式设置
                             new OutputStreamWriter(
-                                    new FileOutputStream("a.txt"))));
+                                    new FileOutputStream("a.txt"),"utf8")));
             int k = 123456;
 //            文本流中的 print 表示打印到文件中？
             out_p.print(k);
             out_p.close();
 //            读文件
             BufferedReader in_r = new BufferedReader(
+//                    第二个参数增加 编码格式设置
                     new InputStreamReader(
-                            new FileInputStream("src/../a.txt")));
+                            new FileInputStream("src/..a.txt"),"utf8"));
             String line;
             while ((line=in_r.readLine()) != null){
                 System.out.println(line);
