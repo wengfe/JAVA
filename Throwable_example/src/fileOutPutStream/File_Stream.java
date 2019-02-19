@@ -1,8 +1,6 @@
 package fileOutPutStream;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class File_Stream {
     public static void main(String[] args) {
@@ -12,9 +10,19 @@ public class File_Stream {
             buf[i] = (byte)i;
         }
         try {
-            FileOutputStream out = new FileOutputStream("a.dat");
-            out.write(buf);
+            DataOutputStream out = new DataOutputStream(
+                    new BufferedOutputStream(
+                    new FileOutputStream("b.dat")));
+//            FileOutputStream out = new FileOutputStream("a.dat");
+//            out.write(buf);
+            int i = 0xcafebabe;
+            out.writeInt(i);
             out.close();
+            DataInputStream in = new DataInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream("b.dat")));
+            int j = in.readInt();
+            System.out.println(j);
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
