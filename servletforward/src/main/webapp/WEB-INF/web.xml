@@ -12,6 +12,14 @@
     <servlet-name>ServletForwardEX</servlet-name>
     <servlet-class>ServletForwardExample</servlet-class>
     </servlet>
+    <servlet>
+      <servlet-name>ServletRedirect</servlet-name>
+      <servlet-class>ServletRedirect</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>ServletRedirectExample</servlet-name>
+      <servlet-class>ServletRedirectExample</servlet-class>
+    </servlet>
     <servlet-mapping>
       <servlet-name>ServletForward</servlet-name>
       <url-pattern>/forward</url-pattern>
@@ -19,5 +27,13 @@
     <servlet-mapping>
       <servlet-name>ServletForwardEX</servlet-name>
       <url-pattern>/servletFE</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>ServletRedirect</servlet-name>
+      <url-pattern>/servletredirect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>ServletRedirectExample</servlet-name>
+      <url-pattern>/servletRE</url-pattern>
     </servlet-mapping>
 </web-app>

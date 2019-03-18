@@ -20,8 +20,8 @@ public class ServletForward extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/servletFE");//创建转发对象，设置转发路径
 //        通过servletContext 获取转发对象; 有两种方式获取转发对象
-        rd = this.getServletContext().getNamedDispatcher("ServletForwardEX");
-        rd = this.getServletContext().getRequestDispatcher("/servletFE");
+//        rd = this.getServletContext().getNamedDispatcher("ServletForwardEX");
+//        rd = this.getServletContext().getRequestDispatcher("/servletFE");
         rd.forward(request,response);     // 转发
     }
 }
