@@ -35,8 +35,9 @@ public class UserServlet extends javax.servlet.http.HttpServlet {
 
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute("userName");
-
-        if (null != null){
+        session.setMaxInactiveInterval(2 * 60); // 设置 session 失效时间
+        session.invalidate();//调用 session 失效接口
+        if (null != name){
             System.out.println("second login: "+ name);
         }
 
@@ -67,7 +68,7 @@ public class UserServlet extends javax.servlet.http.HttpServlet {
             if (userName.equals("123") && userPassword.equals("123")){
                 PrintWriter writer = response.getWriter();
                 writer.println("<html>");
-                writer.println("<head><title>用户中心</title></head>");
+                writer.println("<head><title>用户中心</title><meta charset=\"UTF-8\"></head>");
                 writer.println("<body>");
                 writer.println("<p>用户名：" + userName + "</p>");
                 writer.println("<p>用户密码：" + userPassword + "</p>");
