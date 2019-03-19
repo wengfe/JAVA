@@ -30,13 +30,13 @@ public class UserServlet extends HttpServlet {
         String userPassword = request.getParameter("userPassword");
 
         HttpSession session = request.getSession();
-        // String name = (String) session.getAttribute("userName");
-        // session.setMaxInactiveInterval(2 * 60);
-        // session.invalidate();
-        // if (name != null) {
-        // System.out.println("second login: " + name);
-        // session.removeAttribute("userName");
-        // }
+        String name = (String) session.getAttribute("userName");
+        session.setMaxInactiveInterval(2 * 60);
+//        session.invalidate();
+        if (name != null) {
+            System.out.println("second login: " + name);
+            session.removeAttribute("userName");//移除 attribue 调用 HttpSessionAttributeListener 的attributeRemoved 方法
+        }
 
         session.setAttribute("userName", userName);
 
@@ -60,12 +60,12 @@ public class UserServlet extends HttpServlet {
                 }
             }
         }
-
+        response.setCharacterEncoding("utf-8");
         try {
             if (userName.equals("123") && userPassword.equals("123")) {
                 PrintWriter writer = response.getWriter();
                 writer.println("<html>");
-                writer.println("<head><title>用户中心</title></head>");
+                writer.println("<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><title>用户中心</title></head>");
                 writer.println("<body>");
                 writer.println("<p>用户名：" + userName + "</p>");
                 writer.println("<p>用户密码：" + userPassword + "</p>");

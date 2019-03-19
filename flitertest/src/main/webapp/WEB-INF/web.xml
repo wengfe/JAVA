@@ -16,7 +16,11 @@
         <filter-name>FilterTest</filter-name>
         <url-pattern>/hello/world/*</url-pattern>
     </filter-mapping>
-    
+
+    <listener>
+        <listener-class>TestListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>UserServlet</servlet-class>
