@@ -8,25 +8,30 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException{
         Connection conn = null;
-        Statement statemente = null;
+        Statement statement = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
 //      1. 装载数据库驱动程序；
         Class.forName(JDBC_DRIVER);
 //      2. 通过JDBC建立数据库连接；
         try {
-            //在 url 中 开启 游标功能
+            //在 url 中 开启 游标属性
             DB_URL = DB_URL + "&useCursorFetch=true";
             conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);
 //      3.访问数据库，执行SQL语句；
-//            statemente = conn.createStatement();
-//            rs = statemente.executeQuery("select name from test.user ");
-            preparedStatement = conn.prepareStatement("select  name from test.user");
+//            statement = conn.createStatement();
+//            rs = statement.executeQuery("select name from test.user ");
+//          对 preparedStatement 的 sql 语句进行预编译, ？ 表示参数
+            preparedStatement = conn.prepareStatement("select  * from test.ipdata where id=? and startip = ?");
+//            通过 preparedStatement 使用游标 进行分批查询语句
             preparedStatement.setFetchSize(1);
+//            通过setInt 或者 setString 将，预编译的 sql 语句中的 条件参数传递进去
+            preparedStatement.setInt(1,13);
+            preparedStatement.setString(2,"16844800");
             rs = preparedStatement.executeQuery();
 //      4.获得执行结果
             while(rs.next()) {
-                System.out.println("Hello " + rs.getString("name"));
+                System.out.println("Hello " + rs.getString("country"));
             }
 
 
@@ -40,8 +45,8 @@ public class Main {
                 if(conn != null) {
                     conn.close();
                 }
-                if(statemente != null) {
-                    statemente.close();
+                if(statement != null) {
+                    statement.close();
                 }
                 if(rs != null) {
                     rs.close();
