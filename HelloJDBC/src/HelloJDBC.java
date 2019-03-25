@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Main {
+public class HelloJDBC {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static String DB_URL = "jdbc:mysql://localhost:3306/test?useSSL=true";
     static final String USER = "root";
