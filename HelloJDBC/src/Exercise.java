@@ -1,19 +1,33 @@
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 
 public class Exercise {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String JDBC_URL = "jdbc:mysql://localhost:3306/test?useSSL=true";
     static final String USER = "root";
-    static final String PASSWARD = "admin";
+    static final String PASSWORD = "admin";
+    static BasicDataSource bs = null;
+
+    public static void dbpoolInit(){
+        bs = new BasicDataSource();
+        bs.setDriverClassName(JDBC_DRIVER);
+        bs.setUrl(JDBC_URL);
+        bs.setUsername(USER);
+        bs.setPassword(PASSWORD);
+
+    }
 
     public static void main(String[] args) throws ClassNotFoundException {
+        dbpoolInit();
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         Class.forName(JDBC_DRIVER);
         try {
-            conn = DriverManager.getConnection(JDBC_URL,USER,PASSWARD);
+//            conn = DriverManager.getConnection(JDBC_URL,USER, PASSWORD);
+            conn = bs.getConnection();
             preparedStatement = conn.prepareStatement("select * from book where id = ?");
             preparedStatement.setInt(1,2);
             resultSet = preparedStatement.executeQuery();
