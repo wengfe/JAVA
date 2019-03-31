@@ -20,14 +20,19 @@ public class Login {
 
     public static User Login(String userName, String password) {
         Connection conn = null;
-        Statement stat = null;
+        PreparedStatement pstat = null;
+//        Statement stat = null;
         ResultSet rs = null;
         User user = null;
 
         try {
             conn = ds.getConnection();
-            stat = conn.createStatement();
-            rs = stat.executeQuery("select * from user where name = '" + userName + "' and password = '" + password + "'");
+            pstat = conn.prepareStatement("select * from user where name = ? and password = ?");
+            pstat.setString(1,userName);
+            pstat.setString(2,password);
+            rs = pstat.executeQuery();
+//            stat = conn.createStatement();
+//            rs = stat.executeQuery("select * from user where name = '" + userName + "' and password = '" + password + "'");
             while (rs.next()) {
                 user = new User();
                 user.setUserName(rs.getString("name"));
@@ -39,8 +44,8 @@ public class Login {
             try {
                 if (conn != null)
                     conn.close();
-                if (stat != null)
-                    stat.close();
+                if (pstat != null)
+                    pstat.close();
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
