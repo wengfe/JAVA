@@ -5,4 +5,16 @@
     <select id="getUser" parameterType="int" resultType="User">
         select id,name,password,sex,account from user where id = #{id}
     </select>
+
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (name,password,sex,account) values(#{name},#{password},#{sex},#{account})
+    </insert>
+
+    <update id="updateUserAccount" parameterType="User">
+        update user set account = #{account} where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="User">
+        delete from user where id = #{id}
+    </delete>
 </mapper>
