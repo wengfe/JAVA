@@ -3,7 +3,9 @@
 <mapper namespace="GetUserInfo">
 
     <select id="getUser" parameterType="int" resultType="User">
+        <![CDATA[
         select id,name,password,sex,account from user where id = #{id}
+        ]]>
     </select>
 
     <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
