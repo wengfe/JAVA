@@ -4,19 +4,70 @@
 
     <select id="getUser" parameterType="int" resultType="User">
         <![CDATA[
-        select id,name,password,sex,account from user where id = #{id}
+        select id,name,password,sex,account from user where id = #{id} and account < 10000
         ]]>
     </select>
+    <select id="getUserOne" parameterType="User" resultType="User">
+        <![CDATA[
+        select id,name,password,sex,account from user where id = #{id} and name = #{name}
+        ]]>
+    </select>
+<!--    列名一一对应使用 resultType -->
+<!--    <select id="getUserList" parameterType="int" resultType="User" flushCache="false" useCache="true"-->
+<!--            timeout="10000" fetchSize="100" statementType="PREPARED" resultSetType="FORWARD_ONLY">-->
+<!--        <![CDATA[-->
+<!--        select id,name,password,sex,account from user where id > #{id}-->
+<!--        ]]>-->
+<!--    </select>-->
 
+<!--    列明不对应 使用 sql 假名-->
+<!--    <select id="getUserList" parameterType="int" resultType="User" flushCache="false" useCache="true"-->
+<!--            timeout="10000" fetchSize="100" statementType="PREPARED" resultSetType="FORWARD_ONLY">-->
+<!--        <![CDATA[-->
+<!--        select user_id as "id",user_name as "name",password,sex,account from user where user_id > #{id}-->
+<!--        ]]>-->
+<!--    </select>-->
+<!--    列明不对应 使用 resultMap-->
+    <resultMap id="UserResultMap" type="User">
+        <id property="id" column="user_id"/>
+        <result property="name" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="sex" column="sex"/>
+        <result property="account" column="account"/>
+    </resultMap>
+    <select id="getUserList" parameterType="int" resultMap="UserResultMap" flushCache="false" useCache="true"
+            timeout="10000" fetchSize="100" statementType="PREPARED" resultSetType="FORWARD_ONLY">
+        <![CDATA[
+        select * from user where user_id > #{id};
+        ]]>
+    </select>
     <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into user (name,password,sex,account) values(#{name},#{password},#{sex},#{account})
+        <![CDATA[
+        insert into user values(null,#{name},#{password},#{sex},#{account});
+        ]]>
+    </insert>
+
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+        insert into user values(null,#{name},#{password},#{sex},#{account});
+        ]]>
     </insert>
 
     <update id="updateUserAccount" parameterType="User">
-        update user set account = #{account} where id = #{id}
+        update user set account = #{account} where id = #{id};
+    </update>
+
+    <update id="updateUserNameById" parameterType="User">
+        <![CDATA[
+        update user set name = #{name} where id = #{id};
+        ]]>
     </update>
 
     <delete id="deleteUser" parameterType="User">
+        delete from user where id = #{id};
+    </delete>
+
+    <delete id="deleteUserById" parameterType="int">
         delete from user where id = #{id}
     </delete>
 </mapper>
