@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http:// mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StudentOp">
+
+    <select id="getStudent" parameterType="int" resultMap="StudentMap">
+        <![CDATA[
+        select id,userName,corp from student where id = #{id}
+        ]]>
+    </select>
+
+    <resultMap id="StudentMap" type="Student">
+        <constructor>
+            <idArg column="id" javaType="int"/>
+            <arg column="userName" javaType="String"/>
+            <arg column="corp" javaType="String"/>
+        </constructor>
+    </resultMap>
+</mapper>
