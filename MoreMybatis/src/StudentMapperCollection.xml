@@ -4,8 +4,9 @@
 
     <select id="getStudent" parameterType="int" resultMap="StudentMapC">
         <![CDATA[
-        select s.id as user_id,userName,courseName,corp,c.id as courseId from student s
+        select s.id as user_id,userName,courseName,corp,c.id as courseId,t.id as teacher_id,teacherName from student s
         left join UserCourse uc on s.id = uc.user_id left join course c on uc.course_id = c.id
+        left join teacher t on c.teacher_id = t.id
         where s.id = #{id}
         ]]>
     </select>
@@ -19,6 +20,10 @@
         <collection property="courses" ofType="Course">
             <id property="id" column="courseId"/>
             <result property="courseName" column="courseName"/>
+            <association property="teacher" column="teacher_id" javaType="Teacher">
+                <id property="id" column="teacherId"/>
+                <result property="teacherName" column="teacherName"/>
+            </association>
         </collection>
     </resultMap>
 </mapper>
