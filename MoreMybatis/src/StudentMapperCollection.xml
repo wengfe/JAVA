@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http:// mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StudentOp">
+
+    <select id="getStudent" parameterType="int" resultMap="StudentMapC">
+        <![CDATA[
+        select s.id as user_id,userName,courseName,corp,c.id as courseId from student s
+        left join UserCourse uc on s.id = uc.user_id left join course c on uc.course_id = c.id
+        where s.id = #{id}
+        ]]>
+    </select>
+
+    <resultMap id="StudentMapC" type="Student">
+        <constructor>
+            <idArg column="user_id" javaType="int"/>
+            <arg column="userName" javaType="String"/>
+            <arg column="corp" javaType="String"/>
+        </constructor>
+        <collection property="courses" ofType="Course">
+            <id property="id" column="courseId"/>
+            <result property="courseName" column="courseName"/>
+        </collection>
+    </resultMap>
+</mapper>

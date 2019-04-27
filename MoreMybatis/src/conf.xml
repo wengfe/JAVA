@@ -16,6 +16,7 @@
 
     </environments>
     <mappers>
-        <mapper resource="StudentMapper.xml"/>
+<!--        <mapper resource="StudentMapper.xml"/>-->
+        <mapper resource="StudentMapperCollection.xml"/>
     </mappers>
 </configuration>
