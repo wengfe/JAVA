@@ -5,12 +5,12 @@
   Time: 17:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>come here</title>
 </head>
 <body>
-$END$
+跳转的页面
 </body>
 </html>
