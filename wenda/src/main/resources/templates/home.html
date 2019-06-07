@@ -1,0 +1,19 @@
+<html>
+<body>
+<pre>
+    ${value1}
+    ${value2!}                  <!-- 如果变量不存在，强制为空 -->
+    ${value3!"XYZ"}             <!-- 如果变量不存在显示默认值 XYZ -->
+    ${value4?default("XYZ1")}   <!-- 如果变量不存在显示默认值 XYZ1 -->
+
+<!--    <#list ["red", "green", "blue"] as color>-->
+<!--        ${colors}-->
+<!--    </#list>-->
+
+<!--    <#list colors as color}>-->
+<!--        ${color}-->
+<!--    </#list>-->
+
+</pre>
+</body>
+</html>
